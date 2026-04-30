@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct WanderDogApp: App {
+    
+    @StateObject var walkViewModel: WalkViewModel = WalkViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .environmentObject(walkViewModel)
     }
 }

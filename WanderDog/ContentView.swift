@@ -8,15 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @AppStorage("showWelcome") var showWelcome: Bool = true
+    
+    @EnvironmentObject var walkViewModel: WalkViewModel
+    @State var selectedTab = 0
+    
     var body: some View {
-        VStack {
-            Text("Welcome to WanderDog!")
-                .font(.title)
+        TabView (selection: $selectedTab) {
+            HomeView()
+                .tabItem{
+                    Label("Home", systemImage: "house")
+                }
+                .tag(0)
+            AddWalkView(
+                returnHome: viewHomeScreen
+            )
+                .tabItem{
+                    Label("Add Walk", systemImage: "plus.circle")
+                }
+                .tag(1)
         }
-        .padding()
+        .fullScreenCover(isPresented: $showWelcome, content: {
+            WelcomeTabView(showWelcome: $showWelcome)
+        })
+        // .accentColor(.yellow)
+    }
+    
+    func viewHomeScreen() {
+        selectedTab = 0
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(WalkViewModel())
 }
