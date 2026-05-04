@@ -12,7 +12,6 @@ struct AddDogView: View {
     @State var dogName: String = ""
     @EnvironmentObject var walkViewModel: WalkViewModel
     let exitWelcome: () -> Void
-
     
     var body: some View {
             VStack(spacing: 10) {
@@ -40,16 +39,6 @@ struct AddDogView: View {
                         .font(.title3)
                         .cornerRadius(10)
                 }
-//                Button{
-//                    print("Add dog button pressed")
-//                } label: {
-//                    Text("Cancel")
-//                        .frame(width: 280, height: 50)
-//                        .background(Color.gray)
-//                        .foregroundColor(.white)
-//                        .font(.title3)
-//                        .cornerRadius(10)
-//                }
                 .padding(10)
                 Spacer()
         }

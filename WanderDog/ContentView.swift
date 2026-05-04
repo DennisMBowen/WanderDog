@@ -21,18 +21,25 @@ struct ContentView: View {
                     Label("Home", systemImage: "house")
                 }
                 .tag(0)
+            WalkMapView(
+                returnHome: viewHomeScreen
+            )
+                .tabItem{
+                   Label("Track Walk", systemImage: "location")
+                }
+                .tag(1)
             AddWalkView(
                 returnHome: viewHomeScreen
             )
                 .tabItem{
                     Label("Add Walk", systemImage: "plus.circle")
                 }
-                .tag(1)
+                .tag(2)
+            
         }
         .fullScreenCover(isPresented: $showWelcome, content: {
             WelcomeTabView(showWelcome: $showWelcome)
         })
-        // .accentColor(.yellow)
     }
     
     func viewHomeScreen() {
@@ -41,6 +48,8 @@ struct ContentView: View {
 }
 
 #Preview {
+    
+    
     ContentView()
         .environmentObject(WalkViewModel())
 }

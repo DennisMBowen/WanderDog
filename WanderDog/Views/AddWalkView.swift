@@ -70,7 +70,7 @@ struct AddWalkView: View {
                     .cornerRadius(10)
             }
             Button{
-                print("Cancel")
+                returnHome()
             } label: {
                 Text("Cancel")
                     .frame(width: 280, height: 50)

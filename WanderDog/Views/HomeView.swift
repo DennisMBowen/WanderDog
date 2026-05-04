@@ -13,13 +13,19 @@ struct HomeView: View {
     
     var body: some View {
         VStack (spacing: 10) {
-            TitleView(titleText: walkViewModel.dog.name)
-            Spacer()
-            List {
-                ForEach(walkViewModel.walks) { walk in
-                    ListRowView(walk: walk)
+            TitleView(titleText: "Prior Walks")
+            if walkViewModel.walks.isEmpty {
+                Text("Saved walks will appear here")
+                    .font(.title2)
+                Spacer()
+            }
+            else {
+                List {
+                    ForEach(walkViewModel.walks) { walk in
+                        ListRowView(walk: walk)
+                    }
+                    .onDelete(perform: walkViewModel.deleteWalk)
                 }
-                .onDelete(perform: walkViewModel.deleteWalk)
             }
         }
     }

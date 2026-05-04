@@ -16,19 +16,8 @@ struct ListRowView: View {
             Text(walk.startTime, format: .dateTime.day().month().year())
                 .font(.title2)
             Spacer()
-            Text("\(walk.distance, specifier: "%.1f") miles")
+            Text("\(walk.distance, specifier: "%.2f") miles")
                 .font(.title2)
-//            Spacer()
-//            Button {
-//                print("Delete Button")
-//            } label: {
-//                Image(systemName: "trash")
-//                    .frame(width: 50, height: 50)
-//                    .background(Color.red)
-//                    .foregroundColor(.white)
-//                    .font(.title3)
-//                    .cornerRadius(10)
-//            }
         }
         .padding()
     }
