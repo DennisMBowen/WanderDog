@@ -13,6 +13,7 @@ internal import Combine
 class DogSpotsViewModel:ObservableObject{
     
     @Published var radius: Int = 0
+    @Published var testMessage: String = "Nope"
     
     init() {
         self.radius = radius
@@ -24,6 +25,16 @@ class DogSpotsViewModel:ObservableObject{
     
     func setRadius(radius: Int) {
         self.radius = radius
+    }
+    
+    func findDogSpots(radius: Int) {
+        
+        let dogSpots = callFindDogFriendlyEstablishmentsMicroservice(
+            radius: radius,
+            startingLatitude: 47.6687604,
+            startingLongitude: -122.350254,
+        )
+        self.testMessage = "Finished"
     }
     
 }

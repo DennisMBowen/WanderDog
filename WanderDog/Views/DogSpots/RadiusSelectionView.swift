@@ -12,15 +12,14 @@ struct RadiusSelectionView: View {
     @ObservedObject var dogSpotsViewModel: DogSpotsViewModel
     @State var selectedRadius: Int = 1
     
-    let miles = stride(from: 1, through: 10, by: 1.0).map { $0 }
-    
     var body: some View {
         VStack {
             Text("How many miles do you want to walk?")
                 .font(.title3)
             Picker("Miles walked:", selection: $selectedRadius) {
-                ForEach(miles, id: \.self) { mile in
-                    Text(String(format: "%1.f", mile))
+                ForEach(1...10, id: \.self) { number in
+                    Text("\(number)")
+                        .tag(number)
                 }
             }
             .pickerStyle(.wheel)
@@ -28,6 +27,7 @@ struct RadiusSelectionView: View {
             .clipped()
             Button{
                 dogSpotsViewModel.setRadius(radius: selectedRadius)
+                dogSpotsViewModel.findDogSpots(radius: selectedRadius)
             } label: {
                 Text("Search Locations")
                     .frame(width: 280, height: 50)

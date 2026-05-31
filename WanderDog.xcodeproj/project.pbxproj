@@ -10,9 +10,22 @@
 		950DA9662F8C0CD800E96C04 /* WanderDog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WanderDog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		95131ED62FCCC58000095B15 /* Exceptions for "WanderDog" folder in "WanderDog" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 950DA9652F8C0CD800E96C04 /* WanderDog */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		950DA9682F8C0CD800E96C04 /* WanderDog */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				95131ED62FCCC58000095B15 /* Exceptions for "WanderDog" folder in "WanderDog" target */,
+			);
 			path = WanderDog;
 			sourceTree = "<group>";
 		};
@@ -253,6 +266,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WanderDog/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "In order to use the walk tracking feature of this app, WanderDog must access your location. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -285,6 +299,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WanderDog/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "In order to use the walk tracking feature of this app, WanderDog must access your location. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

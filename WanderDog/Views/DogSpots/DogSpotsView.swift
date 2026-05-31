@@ -10,9 +10,6 @@ import SwiftUI
 struct DogSpotsView: View {
     
     @StateObject var dogSpotsViewModel = DogSpotsViewModel()
-    @State var selectedRadius: Int = 1
-    
-    let miles = stride(from: 1, through: 10, by: 1.0).map { $0 }
     
     var body: some View {
         VStack (){
@@ -24,7 +21,7 @@ struct DogSpotsView: View {
                 RadiusSelectionView(dogSpotsViewModel: dogSpotsViewModel)
             }
             else {
-                Text("Display the Map!")
+                Text(dogSpotsViewModel.testMessage)
             }
             Spacer()
         }
