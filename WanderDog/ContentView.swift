@@ -35,7 +35,11 @@ struct ContentView: View {
                     Label("Add Walk", systemImage: "plus.circle")
                 }
                 .tag(2)
-            
+            DogSpotsView()
+                .tabItem{
+                    Label("Dog Spots", systemImage: "map")
+                }
+                .tag(3)
         }
         .fullScreenCover(isPresented: $showWelcome, content: {
             WelcomeTabView(showWelcome: $showWelcome)
