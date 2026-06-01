@@ -26,8 +26,9 @@ struct RadiusSelectionView: View {
             .frame(height: 150)
             .clipped()
             Button{
-                dogSpotsViewModel.setRadius(radius: selectedRadius)
-                dogSpotsViewModel.findDogSpots(radius: selectedRadius)
+                Task {
+                    await dogSpotsViewModel.findDogSpots(radius: selectedRadius)
+                }
             } label: {
                 Text("Search Locations")
                     .frame(width: 280, height: 50)
@@ -37,6 +38,10 @@ struct RadiusSelectionView: View {
             }
         }
              
+    }
+    
+    func searchLocationsButtonsPressed() async {
+        await dogSpotsViewModel.findDogSpots(radius: selectedRadius)
     }
 }
 

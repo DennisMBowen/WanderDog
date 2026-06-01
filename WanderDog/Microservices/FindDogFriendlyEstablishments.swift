@@ -25,17 +25,18 @@ enum RequestError: Error {
     case invalidData
 }
 
-func callFindDogFriendlyEstablishmentsMicroservice(radius: Int, startingLatitude: Double, startingLongitude: Double) -> [DogFriendlyEstablishment] {
+func callFindDogFriendlyEstablishmentsMicroservice(radius: Int, startingLatitude: Double, startingLongitude: Double) async -> [DogSpotModel] {
     
-    var dogEstablishments: [DogFriendlyEstablishment] = []
+        var dogEstablishments: [DogFriendlyEstablishment] = []
+        var dogSpots: [DogSpotModel] = []
     
-    Task {
         do {
-            print("Radius \(radius)")
             dogEstablishments = try await findDogFriendlyEstablishments(
                 radius: radius,
                 startingLatitude: startingLatitude,
                 startingLongitude: startingLongitude)
+            
+            print(dogEstablishments)
         } catch RequestError.invalidURL {
             print("Invalid URL")
         } catch RequestError.invalidResponse {
@@ -45,10 +46,11 @@ func callFindDogFriendlyEstablishmentsMicroservice(radius: Int, startingLatitude
         } catch {
             print("Errors encountered: \(error)")
         }
-    }
-    
-    return dogEstablishments
-    
+
+        for dogEstablishment in dogEstablishments {
+            dogSpots.append(DogSpotModel(name: dogEstablishment.name, latitude: dogEstablishment.latitude, longitude: dogEstablishment.longitude))
+        }
+    return dogSpots
 }
 
 func findDogFriendlyEstablishments(radius: Int, startingLatitude: Double, startingLongitude: Double) async throws -> [DogFriendlyEstablishment] {

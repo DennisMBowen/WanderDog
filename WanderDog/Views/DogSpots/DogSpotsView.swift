@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct DogSpotsView: View {
     
@@ -17,13 +18,23 @@ struct DogSpotsView: View {
             Text("Find nearby places to bring your dog!")
                 .font(.title2)
             Spacer()
-            if dogSpotsViewModel.getRadius() == 0 {
+            if dogSpotsViewModel.isLoading {
+                Text("Loading...")
+                    .font(.title)
+                Spacer()
+            }
+            else if dogSpotsViewModel.askForRadius {
                 RadiusSelectionView(dogSpotsViewModel: dogSpotsViewModel)
+                Spacer()
             }
             else {
-                Text(dogSpotsViewModel.testMessage)
+                Map(position: $dogSpotsViewModel.mapPosition) {
+                    UserAnnotation()
+                }
             }
-            Spacer()
+        }
+        .onAppear {
+            dogSpotsViewModel.checkLocationAuthorization()
         }
     }
 }
