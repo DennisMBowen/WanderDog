@@ -28,9 +28,7 @@ struct DogSpotsView: View {
                 Spacer()
             }
             else {
-                Map(position: $dogSpotsViewModel.mapPosition) {
-                    UserAnnotation()
-                }
+                DogSpotsMapView(dogSpotsViewModel: dogSpotsViewModel)
             }
         }
         .onAppear {

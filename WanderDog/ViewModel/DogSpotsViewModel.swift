@@ -11,7 +11,7 @@ import SwiftUI
 internal import Combine
 
 let dogSpotsStartingLocation = CLLocationCoordinate2D(latitude: 47.6687604, longitude: -122.350254)
-let dogSpotsStartingSpan = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
+let dogSpotsStartingSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
 
 class DogSpotsViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
@@ -21,15 +21,13 @@ class DogSpotsViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var dogSpots: [DogSpotModel] = []
     @Published var mapPosition: MapCameraPosition = .userLocation(fallback: .automatic)
     @Published var userLocation: CLLocation?
+    @Published var mapRoute: [CLLocationCoordinate2D] = []
     var locationManager =  CLLocationManager()
     var userLatitude: Double = 0.0
     var userLongitude: Double = 0.0
     
-  
-    
     
     func findDogSpots(radius: Int) async {
-        print("Button pressed")
         self.isLoading = true
         self.askForRadius = false
 //        dogSpots = await callFindDogFriendlyEstablishmentsMicroservice(
@@ -39,19 +37,41 @@ class DogSpotsViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 //        )
         print(userLatitude)
         print(userLongitude)
-        print(userLatitude)
-        print(userLongitude)
         if userLatitude != 0.0 && userLongitude != 0.0 {
-            dogSpots = await callFindDogFriendlyEstablishmentsMicroservice(
-                radius: radius,
-                startingLatitude: userLatitude,
-                startingLongitude: userLongitude,
-            )
+//            dogSpots = await callFindDogFriendlyEstablishmentsMicroservice(
+//                radius: radius,
+//                startingLatitude: userLatitude,
+//                startingLongitude: userLongitude,
+//            )
+            await getTestDogWalks()
         }
         print("Dog spots")
         print(dogSpots)
         testMessage = "Success"
         self.isLoading = false
+    }
+    
+    func findRouteToDogSpot(destinationLatitude: Double, destinationLongitude: Double) async {
+        
+        let results: Route = await callFindRouteMicroservice(originLat: userLatitude, originLon: userLongitude, destinationLat: destinationLatitude, destinationLon: destinationLongitude)
+        
+        print(results.route_distance_m)
+        print(results.route_duration_sec)
+        print(results.geometry)
+        
+        for coordinate in results.geometry.coordinates {
+            mapRoute.append(CLLocationCoordinate2D(latitude: coordinate[1], longitude: coordinate[0]))
+        }
+        
+    }
+    
+    func getTestDogWalks() async {
+        let sampleDogSpots: [DogSpotModel] = [
+            DogSpotModel(name: "Kiss Cafe", latitude: 47.6684721, longitude: -122.3937385),
+            DogSpotModel(name: "My Friend Derek’s", latitude: 47.6688088, longitude: -122.333408),
+            DogSpotModel(name: "Pine Tavern", latitude: 47.66425, longitude: -122.3787054)
+        ]
+        dogSpots.append(contentsOf: sampleDogSpots)
     }
     
     // Map and User Location logic
