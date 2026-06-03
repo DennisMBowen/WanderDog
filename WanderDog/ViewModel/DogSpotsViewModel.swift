@@ -22,6 +22,10 @@ class DogSpotsViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var mapPosition: MapCameraPosition = .userLocation(fallback: .automatic)
     @Published var userLocation: CLLocation?
     @Published var mapRoute: [CLLocationCoordinate2D] = []
+    @Published var distanceInMiles = 0.0
+    @Published var formattedDistance: String = ""
+    @Published var routeHours: Int = 0
+    @Published var routeMinutes: Int = 0
     var locationManager =  CLLocationManager()
     var userLatitude: Double = 0.0
     var userLongitude: Double = 0.0
@@ -52,16 +56,31 @@ class DogSpotsViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func findRouteToDogSpot(destinationLatitude: Double, destinationLongitude: Double) async {
+        self.isLoading = true
         
         let results: Route = await callFindRouteMicroservice(originLat: userLatitude, originLon: userLongitude, destinationLat: destinationLatitude, destinationLon: destinationLongitude)
-        
+        print("Route distance in meters:")
         print(results.route_distance_m)
+        print("Route duration in seconds:")
         print(results.route_duration_sec)
-        print(results.geometry)
+        // print(results.geometry)
+        
         
         for coordinate in results.geometry.coordinates {
             mapRoute.append(CLLocationCoordinate2D(latitude: coordinate[1], longitude: coordinate[0]))
         }
+        let distanceDouble = Double(results.route_distance_m)
+        distanceInMiles = await callConvertLengthMicroservice(measurement: distanceDouble, inputType: "m", conversionType: "mi")
+        print(distanceInMiles)
+        formattedDistance = String(format: "%.2f", distanceInMiles)
+        
+        let roundedDuration = Int(Double(results.route_duration_sec.rounded()))
+        let convertTime = await callDurationConversionMicroservice(seconds: roundedDuration)
+        print(convertTime.formatted)
+        routeHours = convertTime.hours
+        routeMinutes = convertTime.minutes
+        
+        self.isLoading = false
         
     }
     

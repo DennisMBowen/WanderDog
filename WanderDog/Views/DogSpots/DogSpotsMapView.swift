@@ -12,6 +12,24 @@ struct DogSpotsMapView: View {
     
     @ObservedObject var dogSpotsViewModel: DogSpotsViewModel
     var body: some View {
+        if dogSpotsViewModel.distanceInMiles > 0 {
+            HStack() {
+                Text("Distance:")
+//                Text(dogSpotsViewModel.distanceInMiles, format: .number.precision(.fractionLength(2)))
+//                Text("miles")
+                Text("\(dogSpotsViewModel.formattedDistance) miles")
+            }
+        }
+        if dogSpotsViewModel.routeMinutes > 0 {
+            HStack() {
+                Text("Time:")
+                if (dogSpotsViewModel.routeHours > 0) {
+                    Text("\(dogSpotsViewModel.routeHours) hour(s)")
+                }
+                Text("\(dogSpotsViewModel.routeMinutes) minutes")
+                
+            }
+        }
         Map(initialPosition: dogSpotsViewModel.mapRegion) {
             UserAnnotation()
             ForEach (dogSpotsViewModel.dogSpots) { dogSpot in

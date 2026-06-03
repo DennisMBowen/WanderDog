@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct ResponseData: Codable {
     let return_data: [DogFriendlyEstablishment]
 }
