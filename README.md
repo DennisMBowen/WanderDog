@@ -8,14 +8,14 @@ WanderDog is an iOS that allows dog owners the ability to track the daily walk h
 It is written using Swift, SwiftUI, MapKit, Core Location, and microservices.
 
 
-Key Features
+## Key Features
 ===================
 
-** Track Walk Feature
+### Track Walk Feature
 _____________________
 
-** Add Walk Feature
+### Add Walk Feature
 _____________________
 
-** Dog Spots Feature
+### Dog Spots Feature
 ____________________
