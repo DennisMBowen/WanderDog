@@ -14,7 +14,8 @@ It is written using Swift, SwiftUI, MapKit, Core Location, and HTTP requests to 
 ____________________
 The home screen lists the data from all previously recorded walks.
 
-<img width="355" height="727" alt="Home Screen" src="https://github.com/user-attachments/assets/35543d7b-b52d-4096-b9da-17c4fa84f95c" />
+<img width="339" height="731" alt="HomeScreen" src="https://github.com/user-attachments/assets/ffb9fcf3-c4de-434a-883e-c19b220b7397" />
+
 
 ### Track Walk Feature
 _____________________
@@ -37,9 +38,20 @@ This feature allows users to manually input information from a previous walk. Th
 ### Dog Spots Feature
 ____________________
 
-This feature allows users to find dog friendly establishments within a selected radius of their current location. Currently, an establishment is defined as a bar or restaurant. This feature generates a route from their current location to the selected establishment, and lets the user know how many miles they would cover by walking to the establishment.
+This feature allows users to find dog friendly establishments within a selected radius of their current location. Currently, an establishment is defined as a bar or restaurant. This feature generates a route from their current location to the selected establishment, and lets the user know how many miles they would cover by walking to the establishment. This feature was built using microservices. They are explained in further detail after the sample screenshots.
 
-<img width="404" height="882" alt="FindDogSpots" src="https://github.com/user-attachments/assets/c00e0165-9152-4b3d-aa1d-ae30e8e6fc4e" />
+Dog Spots Found
+
+<img width="349" height="721" alt="FindDogSpots" src="https://github.com/user-attachments/assets/980e5fb1-7799-4200-80b8-deaa29aadb04" />
+
+User Selected Dog Spot
+
+<img width="348" height="725" alt="FindDogSpotsPopup" src="https://github.com/user-attachments/assets/c069079a-3996-4e86-b8b3-97904f591d3f" />
+
+Route Display
+
+<img width="338" height="723" alt="FindDogSpotsRoute" src="https://github.com/user-attachments/assets/97447f36-539d-4119-b5a0-0abeb1122581" />
+
 
 The four microservices being used for this feature are:
 + find_dog_friendly_establishments: Uses the Overpass API with data from OpenStreetMap to locate dog friendly establishments within a certain radius of a user's location
